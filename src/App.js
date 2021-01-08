@@ -1,4 +1,4 @@
-import "./App.css";
+import Menu from "./components/MenuComponent";
 import { Navbar, NavbarBrand } from "reactstrap";
 
 function App() {
@@ -9,6 +9,7 @@ function App() {
           <NavbarBrand href="/">Ristorante Con Fusion</NavbarBrand>
         </div>
       </Navbar>
+      <Menu />
     </div>
   );
 }
