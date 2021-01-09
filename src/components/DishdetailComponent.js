@@ -9,69 +9,51 @@ export default class DishDetail extends Component {
   }
 
   renderDish(dish) {
-    if (dish != null)
-      return (
-        <Card>
-          <CardImg top src={dish.image} alt={dish.name} />
-          <CardBody>
-            <CardTitle>{dish.name}</CardTitle>
-            <CardText>{dish.description}</CardText>
-          </CardBody>
-        </Card>
-      );
-    else return <div></div>;
+    return (
+      <Card>
+        <CardImg top src={dish.image} alt={dish.name} />
+        <CardBody>
+          <CardTitle>{dish.name}</CardTitle>
+          <CardText>{dish.description}</CardText>
+        </CardBody>
+      </Card>
+    );
   }
 
   renderComments(comments) {
-    if (comments != null) {
-      const c = comments.map((comment) => {
-        const monthNames = [
-          "Jan",
-          "Feb",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-          "Aug",
-          "Sept",
-          "Oct",
-          "Nov",
-          "Dec",
-        ];
-        let date = new Date(comment.date);
-        let dateString =
-          monthNames[date.getMonth()] +
-          " " +
-          date.getDate() +
-          ", " +
-          date.getFullYear();
-        return (
-          <div>
-            <p>{comment.comment}</p>
-            <p>
-              -- {comment.author}, {dateString}
-            </p>
-          </div>
-        );
-      });
-      return <div>{c}</div>;
-    } else return <div></div>;
+    const c = comments.map((comment) => {
+      return (
+        <div>
+          <p>{comment.comment}</p>
+          <p>
+            -- {comment.author},{" "}
+            {new Intl.DateTimeFormat("en-US", {
+              year: "numeric",
+              month: "short",
+              day: "2-digit",
+            }).format(new Date(Date.parse(comment.date)))}
+          </p>
+        </div>
+      );
+    });
+    return <div>{c}</div>;
   }
 
   render() {
     let props = this.props;
-    return (
+    return props.dish != null ? (
       <div className="row">
         <div className="col-12 col-md-5 m-1">
-          {this.renderDish(props.selectedDish)}
+          {console.log("props:", props)}
+          {this.renderDish(props.dish)}
         </div>
-        {console.log("props:", props)}
         <div className="col-12 col-md-5 m-1">
           <h4>Comments</h4>
-          {this.renderComments(props.selectedDish.comments)}
+          {this.renderComments(props.dish.comments)}
         </div>
       </div>
+    ) : (
+      <div></div>
     );
   }
 }
