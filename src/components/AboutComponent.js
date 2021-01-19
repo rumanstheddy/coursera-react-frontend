@@ -6,15 +6,37 @@ import {
   CardBody,
   CardHeader,
   Media,
-} from "reactstsrap";
+} from "reactstrap";
 import { Link } from "react-router-dom";
 
-function RenderLeader(leader) {
+function RenderLeader(props) {
+  return (
+    <div>
+      <Media>
+        <Media left href="#">
+          <Media
+            object
+            src={process.env.PUBLIC_URL + props.leader.image}
+            alt="Generic placeholder image"
+          />
+        </Media>
+        <Media body className="pl-5">
+          <Media heading>{props.leader.name}</Media>
+          {props.leader.designation}
+          <br />
+          <br />
+          {props.leader.description}
+        </Media>
+      </Media>
+      <br />
+    </div>
+  );
 }
 
 function About(props) {
   const leaders = props.leaders.map((leader) => {
-    return <p>Leader {leader.name}</p>;
+    // console.log(leader);
+    return <RenderLeader leader={leader} />;
   });
 
   return (
