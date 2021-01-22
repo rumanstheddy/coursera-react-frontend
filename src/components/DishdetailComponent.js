@@ -9,6 +9,7 @@ import {
   BreadcrumbItem,
 } from "reactstrap";
 import { Link } from "react-router-dom";
+import CommentForm from "./CommentForm";
 
 function RenderDish({ dish }) {
   return (
@@ -38,7 +39,12 @@ function RenderComments({ comments }) {
       </div>
     );
   });
-  return <div>{c}</div>;
+  return (
+    <div>
+      {c}
+      <CommentForm />
+    </div>
+  );
 }
 
 const DishDetail = (props) => {
