@@ -40,7 +40,7 @@ class CommentForm extends Component {
     let values = this.state;
     console.log("Current State is: " + JSON.stringify(this.state));
     // event.preventDefault();
-    this.props.addComment(
+    this.props.postComment(
       this.props.dishId,
       values.rating,
       values.author,
@@ -164,7 +164,7 @@ function RenderDish({ dish }) {
   );
 }
 
-function RenderComments({ comments, addComment, dishId }) {
+function RenderComments({ comments, postComment, dishId }) {
   const c = comments.map((comment) => {
     return (
       <div>
@@ -183,7 +183,7 @@ function RenderComments({ comments, addComment, dishId }) {
   return (
     <div>
       {c}
-      <CommentForm dishId={dishId} addComment={addComment} />
+      <CommentForm dishId={dishId} postComment={postComment} />
     </div>
   );
 }
@@ -227,7 +227,7 @@ const DishDetail = (props) => {
           <div className="col-12 col-md-5 m-1">
             <RenderComments
               comments={props.comments}
-              addComment={props.addComment}
+              postComment={props.postComment}
               dishId={props.dish.id}
             />
           </div>
